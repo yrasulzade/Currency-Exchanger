@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.example.currencyexchanger'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.example.currencyexchanger"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://developers.paysera.com/tasks/api/\""
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$test_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_ktx_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_ktx_version"
+
+    //Network
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$logging_interceptor_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$moshi_version"
+
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+
+    //Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_android"
+    kapt "com.google.dagger:hilt-compiler:$dagger_hilt_version"
+
+}
